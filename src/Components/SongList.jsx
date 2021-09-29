@@ -1,34 +1,40 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectSong } from "../actions";
+import { selectSong, selectArtist } from '../actions'
 
-class SongList extends React.Component {
-  renderList() {
-    return this.props.songs.map(song => {
-      return (
+const SongList = props => {
+  return props.songs.map(song => {
+    return (
+      <div className="ui divided list">
         <div className="item" key={song.title}>
           <div className="right floated content">
             <button
               onClick={() => {
-                this.props.selectSong(song);
+                props.selectSong(song)
+                props.selectArtist(song.artist)
               }}
               className="ui button primary">
               Select
             </button>
           </div>
-          <div className="content">{song.title}</div>
+          <div className="content">
+            <p>
+              {song.title}, {song.artist}
+            </p>
+          </div>
         </div>
-      );
-    });
-  }
-
-  render() {
-    return <div className="ui divided list">{this.renderList()}</div>;
-  }
+      </div>
+    )
+  })
 }
 
 const mapStateToProps = state => {
-  return { songs: state.songs };
-};
-// v^ we are mapping redux store (~state) to component props
-export default connect(mapStateToProps, { selectSong })(SongList);
+  return { songs: state.songs }
+}
+
+const mapDispatchToProps = {
+  selectSong,
+  selectArtist,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongList)

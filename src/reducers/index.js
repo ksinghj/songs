@@ -1,24 +1,42 @@
 import { combineReducers } from "redux";
+import types from '../actions/types'
+import { fetchSongData } from '../api'
 
 const songsReducer = () => {
-  return [
-    { title: "Elevate", duration: "3:45" },
-    { title: "Come Thru", duration: "3:48" },
-    { title: "Hotline Bling", duration: "3:21" },
-    { title: "Passionfruit", duration: "4:45" }
-  ];
-};
+  return fetchSongData()
+}
 
 const selectedSongReducer = (selectedSong = null, action) => {
-  if (action.type === "SONG_SELECTED") {
-    return action.payload;
+  if (action.type === 'SONG_SELECTED') {
+    return action.payload
   }
 
-  return selectedSong;
-};
+  return selectedSong
+}
+
+const selectedArtistReducer = (selectedArtist = null, action) => {
+  switch (action.type) {
+    case types.ARTIST_SELECTED:
+      return action.payload
+    default:
+      return selectedArtist
+  }
+}
+
+const artistInfoReducer = (artistInfo = null, action) => {
+  switch (action.type) {
+    case types.FETCH_ARTIST_INFO_SUCCESS:
+      console.log(action)
+      return action.payload
+    default:
+      return artistInfo
+  }
+}
 
 export default combineReducers({
   // this is where state is (store)
   songs: songsReducer,
-  selectedSong: selectedSongReducer
-});
+  selectedSong: selectedSongReducer,
+  selectedArtist: selectedArtistReducer,
+  artistInfo: artistInfoReducer,
+})
