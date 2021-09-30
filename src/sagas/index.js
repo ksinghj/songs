@@ -3,7 +3,7 @@ import types from '../actions/types'
 import { fetchArtistInfo } from '../api'
 
 // worker Saga: will be fired on FETCH_ARTIST_INFO_SUCCESS actions
-function* fetchArtistInfoWorker(action) {
+export function* fetchArtistInfoWorker(action) {
   try {
     const artistInfo = yield call(fetchArtistInfo, action.payload)
     yield put({

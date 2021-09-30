@@ -8,7 +8,7 @@ export const fetchSongData = () => {
   ]
 }
 
-const ARTIST_INFO_URL = 'https://theaudiodb.com/api/v1/json/1/discography.php?s='
+export const ARTIST_INFO_URL = 'https://theaudiodb.com/api/v1/json/1/discography.php?s='
 // fetch artist other albums
 export const fetchArtistInfo = artistName => {
   return fetch(`${ARTIST_INFO_URL}${artistName}`)
