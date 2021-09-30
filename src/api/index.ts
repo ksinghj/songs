@@ -10,8 +10,16 @@ export const fetchSongData = () => {
 
 export const ARTIST_INFO_URL = 'https://theaudiodb.com/api/v1/json/1/discography.php?s='
 // fetch artist other albums
-export const fetchArtistInfo = artistName => {
-  return fetch(`${ARTIST_INFO_URL}${artistName}`)
-    .then(res => res)
-    .then(data => data.json())
+export const fetchArtistInfo = async (artistName: string) => {
+  const res = await fetch(`${ARTIST_INFO_URL}${artistName}`)
+  return await res.json()
+}
+
+interface albumItem {
+  strAlbum: string
+  intYearReleased: string
+}
+
+export interface artistInfoType {
+  album: albumItem[]
 }

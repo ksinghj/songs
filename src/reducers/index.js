@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import types from '../actions/types'
+import actionTypes from '../actions/types'
 import { fetchSongData } from '../api'
 
 const songsReducer = () => {
@@ -16,7 +16,7 @@ const selectedSongReducer = (selectedSong = null, action) => {
 
 const selectedArtistReducer = (selectedArtist = null, action) => {
   switch (action.type) {
-    case types.ARTIST_SELECTED:
+    case actionTypes.ARTIST_SELECTED:
       return action.payload
     default:
       return selectedArtist
@@ -25,7 +25,7 @@ const selectedArtistReducer = (selectedArtist = null, action) => {
 
 const artistInfoReducer = (artistInfo = null, action) => {
   switch (action.type) {
-    case types.FETCH_ARTIST_INFO_SUCCESS:
+    case actionTypes.FETCH_ARTIST_INFO_SUCCESS:
       console.log(action)
       return action.payload
     default:
